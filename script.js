@@ -75,10 +75,6 @@ window.addEventListener('resize', () => positionNavLiquid(document.querySelector
 updateHeader();
 requestAnimationFrame(() => positionNavLiquid(document.querySelector('.nav-links .is-active')));
 
-const gallery = document.querySelector('.service-gallery');
-document.querySelector('.gallery-prev').addEventListener('click', () => gallery.scrollBy({ left: -gallery.clientWidth * .7, behavior: 'smooth' }));
-document.querySelector('.gallery-next').addEventListener('click', () => gallery.scrollBy({ left: gallery.clientWidth * .7, behavior: 'smooth' }));
-
 document.querySelector('#quote-form').addEventListener('submit', event => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
@@ -89,6 +85,33 @@ document.querySelector('#quote-form').addEventListener('submit', event => {
   link.download = 'veyra-shipment-enquiry.txt';
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+
+const faqMotionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('.faq-list details').forEach(detail => {
+  const summary = detail.querySelector('summary');
+  let transitionToken = 0;
+
+  summary.addEventListener('click', event => {
+    event.preventDefault();
+    const shouldOpen = !detail.classList.contains('is-expanded');
+    const token = ++transitionToken;
+
+    if (shouldOpen) {
+      detail.open = true;
+      requestAnimationFrame(() => {
+        if (token === transitionToken) detail.classList.add('is-expanded');
+      });
+      return;
+    }
+
+    detail.classList.remove('is-expanded');
+    window.setTimeout(() => {
+      if (token === transitionToken && !detail.classList.contains('is-expanded')) {
+        detail.open = false;
+      }
+    }, faqMotionReduced ? 180 : 460);
+  });
 });
 
 const aboutCopy = document.querySelector('.about-scroll-copy');
@@ -127,7 +150,7 @@ if (window.gsap) {
     scrollTrigger: { trigger: '.mosaic', start: 'top 78%' }
   });
   for (const section of document.querySelectorAll('.section:not(.about)')) {
-    gsap.from(section.querySelectorAll('h2, .section-intro p, .service-card, .process-steps > div, .faq-list details'), {
+    gsap.from(section.querySelectorAll('h2, .section-intro p, .service-card, .process-card, .quote-checklist, .faq-list details'), {
       scrollTrigger: { trigger: section, start: 'top 88%' },
       y: reducedMotion ? 0 : 22,
       opacity: 0,
