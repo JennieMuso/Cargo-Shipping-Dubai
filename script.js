@@ -43,6 +43,29 @@ const sectionObserver = new IntersectionObserver(entries => {
 
 observedSections.forEach(section => sectionObserver.observe(section));
 
+const journeyAccordions = [...document.querySelectorAll('[data-accordion-group] .accordion-item[data-image-panel]')];
+const journeyImages = [...document.querySelectorAll('.why-image-panel[data-panel]')];
+
+function activateJourneyPanel(selectedItem) {
+  const panelName = selectedItem.dataset.imagePanel;
+  journeyAccordions.forEach(item => {
+    const active = item === selectedItem;
+    item.classList.toggle('is-active', active);
+    item.querySelector('.accordion-trigger').setAttribute('aria-expanded', String(active));
+  });
+  journeyImages.forEach(image => {
+    const active = image.dataset.panel === panelName;
+    image.classList.toggle('is-active', active);
+    image.setAttribute('aria-hidden', String(!active));
+  });
+}
+
+journeyAccordions.forEach(item => {
+  item.querySelector('.accordion-trigger').addEventListener('click', () => {
+    if (!item.classList.contains('is-active')) activateJourneyPanel(item);
+  });
+});
+
 function updateHeader() {
   header.classList.toggle('is-scrolled', window.scrollY > 48);
 }
@@ -76,21 +99,40 @@ if (aboutCopy) {
   aboutCopy.innerHTML = words.map(word => `<span class="copy-word">${word}</span>`).join(' ');
 }
 
-if (window.gsap && !reducedMotion) {
+if (window.gsap) {
   gsap.registerPlugin(ScrollTrigger);
-  gsap.from('.hero-intro > *', { y: 20, opacity: 0, stagger: .13, duration: .8, ease: 'power2.out' });
-  gsap.from('.hero-name', { clipPath: 'inset(100% 0 0 0)', y: 28, duration: 1.05, delay: .25, ease: 'power3.out' });
-  gsap.to('.hero', { backgroundPosition: 'center 58%', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  gsap.from('.hero-intro > *', {
+    y: reducedMotion ? 0 : 20,
+    opacity: 0,
+    stagger: reducedMotion ? .04 : .13,
+    duration: reducedMotion ? .35 : .8,
+    ease: 'power2.out'
+  });
+  gsap.from('.hero-name', reducedMotion
+    ? { opacity: 0, duration: .4, delay: .1, ease: 'power2.out' }
+    : { clipPath: 'inset(100% 0 0 0)', y: 28, duration: 1.05, delay: .25, ease: 'power3.out' });
+  if (!reducedMotion) {
+    gsap.to('.hero', { backgroundPosition: 'center 58%', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  }
   gsap.to('.copy-word', { color: '#102c34', stagger: .035, ease: 'none', scrollTrigger: { trigger: '.about-scroll-copy', start: 'top 78%', end: 'bottom 46%', scrub: true } });
-  gsap.from('.mosaic-main', { clipPath: 'inset(0 0 100% 0)', duration: .8, ease: 'power3.out', scrollTrigger: { trigger: '.mosaic', start: 'top 82%' } });
-  gsap.from('.mosaic-top, .mosaic-stat, .mosaic-small', { y: 24, opacity: 0, stagger: .09, duration: .62, ease: 'power2.out', scrollTrigger: { trigger: '.mosaic', start: 'top 78%' } });
+  gsap.from('.mosaic-main', reducedMotion
+    ? { opacity: 0, duration: .35, ease: 'power2.out', scrollTrigger: { trigger: '.mosaic', start: 'top 82%' } }
+    : { clipPath: 'inset(0 0 100% 0)', duration: .8, ease: 'power3.out', scrollTrigger: { trigger: '.mosaic', start: 'top 82%' } });
+  gsap.from('.mosaic-top, .mosaic-stat, .mosaic-small', {
+    y: reducedMotion ? 0 : 24,
+    opacity: 0,
+    stagger: reducedMotion ? .04 : .09,
+    duration: reducedMotion ? .35 : .62,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.mosaic', start: 'top 78%' }
+  });
   for (const section of document.querySelectorAll('.section:not(.about)')) {
     gsap.from(section.querySelectorAll('h2, .section-intro p, .service-card, .process-steps > div, .faq-list details'), {
       scrollTrigger: { trigger: section, start: 'top 88%' },
-      y: 22,
+      y: reducedMotion ? 0 : 22,
       opacity: 0,
-      stagger: .07,
-      duration: .65,
+      stagger: reducedMotion ? .03 : .07,
+      duration: reducedMotion ? .3 : .65,
       ease: 'power2.out'
     });
   }
