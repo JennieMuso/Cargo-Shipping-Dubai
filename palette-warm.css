@@ -1,16 +1,16 @@
 :root {
-  --navy: #1b2338;
-  --ink: #1b2338;
-  --teal: #a84a32;
-  --lime: #f4a261;
-  --paper: #fffaf3;
-  --mist: #f5eee5;
-  --muted: #746a63;
-  --soft-mint: #efe0d2;
-  --soft-lime: #fee4bf;
-  --line: rgba(27,35,56,.14);
-  --warm-copy: #625d59;
-  --warm-soft: #f8f1e9;
+  --navy: #0f3d3a;
+  --ink: #111111;
+  --teal: #6c151e;
+  --lime: #f5dabf;
+  --paper: #fffbf6;
+  --mist: #f8eee4;
+  --muted: #6a625c;
+  --soft-mint: #dfe9e4;
+  --soft-lime: #f5dabf;
+  --line: rgba(17,17,17,.14);
+  --warm-copy: #4a4642;
+  --warm-soft: #f8eee4;
 }
 
 body,
@@ -25,26 +25,26 @@ body,
 }
 
 .hero:before {
-  background: rgba(20,27,46,.36);
+  background: rgba(15,61,58,.38);
 }
 
 .page-hero:after {
   background:
-    linear-gradient(90deg,rgba(20,27,46,.84) 0%,rgba(20,27,46,.58) 46%,rgba(20,27,46,.16) 78%),
-    linear-gradient(0deg,rgba(20,27,46,.5),transparent 48%);
+    linear-gradient(90deg,rgba(15,61,58,.86) 0%,rgba(15,61,58,.6) 46%,rgba(15,61,58,.16) 78%),
+    linear-gradient(0deg,rgba(15,61,58,.54),transparent 48%);
 }
 
 .service-detail-hero:after {
-  background: linear-gradient(180deg,transparent,rgba(20,27,46,.7));
+  background: linear-gradient(180deg,transparent,rgba(15,61,58,.76));
 }
 
 .cta:before {
-  background: rgba(20,27,46,.64);
+  background: rgba(15,61,58,.68);
 }
 
 .cta form,
 .enquiry-form {
-  background: rgba(27,35,56,.94);
+  background: rgba(15,61,58,.96);
 }
 
 .site-header.is-scrolled .nav-liquid,
@@ -55,15 +55,15 @@ body,
 
 .inner-page .site-header.is-scrolled .nav-links,
 .site-header.is-scrolled .nav-links {
-  background: rgba(255,250,243,.9);
+  background: rgba(255,251,246,.92);
 }
 
 .inner-page .nav-links {
-  background: rgba(27,35,56,.26);
+  background: rgba(15,61,58,.3);
 }
 
 .inner-page .nav-liquid {
-  background: rgba(244,162,97,.28);
+  background: rgba(245,218,191,.32);
 }
 
 .services,
@@ -86,8 +86,8 @@ body,
 }
 
 .accordion-item.is-active {
-  border-color: rgba(244,162,97,.7);
-  box-shadow: inset 0 0 0 1px rgba(244,162,97,.32);
+  border-color: rgba(108,21,30,.55);
+  box-shadow: inset 0 0 0 1px rgba(108,21,30,.2);
 }
 
 .accordion-icon,
@@ -99,10 +99,22 @@ body,
   background: var(--soft-lime);
 }
 
-.mosaic-stat,
 .button-lime,
-.page-cta {
+.service-card-action,
+.bento-number,
+.card-arrow,
+.process-number {
   background: var(--lime);
+}
+
+.mosaic-stat,
+.page-cta {
+  background: var(--teal);
+  color: var(--lime);
+}
+
+.page-cta .button {
+  color: var(--lime);
 }
 
 .quote-checklist,
@@ -118,12 +130,12 @@ body,
 }
 
 .quote-checklist li {
-  border-color: rgba(27,35,56,.1);
-  background: rgba(255,250,243,.62);
+  border-color: rgba(17,17,17,.1);
+  background: rgba(255,251,246,.68);
 }
 
 .sample-quote dl > div:nth-child(odd) {
-  background: #ead7c6;
+  background: #ead8c8;
 }
 
 .page-intro p,
@@ -150,13 +162,13 @@ body,
 .display-statement .muted,
 .about .about-scroll-copy,
 .about-scroll-copy .copy-word {
-  color: #a19185;
+  color: #8a817a;
 }
 
 .page-kicker,
 .quote-checklist-intro > span,
 .step-row .step-index {
-  color: #806e61;
+  color: #6a625c;
 }
 
 .page-hero .page-kicker,
@@ -171,7 +183,7 @@ body,
 }
 
 .footer-bottom {
-  border-color: rgba(27,35,56,.14);
+  border-color: rgba(17,17,17,.14);
 }
 
 .service-card .service-card-copy p,
@@ -185,7 +197,7 @@ body,
 
 @media (max-width: 680px) {
   .inner-page .nav-links {
-    background: rgba(255,250,243,.98);
+    background: rgba(255,251,246,.98);
   }
 
   .inner-page .nav-links a.is-active {
