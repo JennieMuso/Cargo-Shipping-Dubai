@@ -1,0 +1,194 @@
+:root {
+  --navy: #1b2338;
+  --ink: #1b2338;
+  --teal: #a84a32;
+  --lime: #f4a261;
+  --paper: #fffaf3;
+  --mist: #f5eee5;
+  --muted: #746a63;
+  --soft-mint: #efe0d2;
+  --soft-lime: #fee4bf;
+  --line: rgba(27,35,56,.14);
+  --warm-copy: #625d59;
+  --warm-soft: #f8f1e9;
+}
+
+body,
+.inner-page {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.hero:before {
+  background: rgba(20,27,46,.36);
+}
+
+.page-hero:after {
+  background:
+    linear-gradient(90deg,rgba(20,27,46,.84) 0%,rgba(20,27,46,.58) 46%,rgba(20,27,46,.16) 78%),
+    linear-gradient(0deg,rgba(20,27,46,.5),transparent 48%);
+}
+
+.service-detail-hero:after {
+  background: linear-gradient(180deg,transparent,rgba(20,27,46,.7));
+}
+
+.cta:before {
+  background: rgba(20,27,46,.64);
+}
+
+.cta form,
+.enquiry-form {
+  background: rgba(27,35,56,.94);
+}
+
+.site-header.is-scrolled .nav-liquid,
+.inner-page .site-header.is-scrolled .nav-liquid,
+.inner-page .site-header.is-scrolled .nav-action {
+  background: var(--navy);
+}
+
+.inner-page .site-header.is-scrolled .nav-links,
+.site-header.is-scrolled .nav-links {
+  background: rgba(255,250,243,.9);
+}
+
+.inner-page .nav-links {
+  background: rgba(27,35,56,.26);
+}
+
+.inner-page .nav-liquid {
+  background: rgba(244,162,97,.28);
+}
+
+.services,
+.page-section--tint,
+.process-card,
+.directory-card,
+.step-row,
+.detail-faq-list details,
+.accordion details,
+.faq-list details {
+  background: var(--mist);
+}
+
+.accordion-item.is-active,
+.accordion details[open],
+.faq-list details.is-expanded,
+.detail-faq-list details.is-expanded,
+.step-row:nth-child(even) {
+  background: var(--soft-mint);
+}
+
+.accordion-item.is-active {
+  border-color: rgba(244,162,97,.7);
+  box-shadow: inset 0 0 0 1px rgba(244,162,97,.32);
+}
+
+.accordion-icon,
+.process-number,
+.service-card-action,
+.bento-number,
+.card-arrow,
+.info-card-icon {
+  background: var(--soft-lime);
+}
+
+.mosaic-stat,
+.button-lime,
+.page-cta {
+  background: var(--lime);
+}
+
+.quote-checklist,
+.sample-quote,
+.story-panel,
+.bento-card,
+.comparison-card {
+  background: var(--soft-mint);
+}
+
+.comparison-card:nth-child(2) {
+  background: var(--soft-lime);
+}
+
+.quote-checklist li {
+  border-color: rgba(27,35,56,.1);
+  background: rgba(255,250,243,.62);
+}
+
+.sample-quote dl > div:nth-child(odd) {
+  background: #ead7c6;
+}
+
+.page-intro p,
+.section-intro p,
+.services-heading p,
+.bento-copy p,
+.info-card p,
+.story-panel p,
+.directory-card p,
+.step-row p,
+.detail-answer p,
+.service-card p,
+.process-card p,
+.accordion p,
+.faq-list p,
+.faq > div > p,
+.quote-checklist small,
+.footer-grid p,
+.footer-grid a:not(.logo),
+.footer-bottom {
+  color: var(--warm-copy);
+}
+
+.display-statement .muted,
+.about .about-scroll-copy,
+.about-scroll-copy .copy-word {
+  color: #a19185;
+}
+
+.page-kicker,
+.quote-checklist-intro > span,
+.step-row .step-index {
+  color: #806e61;
+}
+
+.page-hero .page-kicker,
+.service-detail-copy .page-kicker {
+  color: rgba(255,255,255,.82);
+}
+
+.check-list li:before,
+.text-link,
+.logo span {
+  color: var(--teal);
+}
+
+.footer-bottom {
+  border-color: rgba(27,35,56,.14);
+}
+
+.service-card .service-card-copy p,
+.image-card .bento-copy p {
+  color: rgba(255,255,255,.8);
+}
+
+:focus-visible {
+  outline-color: var(--teal);
+}
+
+@media (max-width: 680px) {
+  .inner-page .nav-links {
+    background: rgba(255,250,243,.98);
+  }
+
+  .inner-page .nav-links a.is-active {
+    background: var(--soft-lime);
+  }
+}
