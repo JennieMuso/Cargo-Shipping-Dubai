@@ -66,12 +66,21 @@ journeyAccordions.forEach(item => {
   });
 });
 
+const homeHero = document.querySelector('.hero');
+
 function updateHeader() {
-  header.classList.toggle('is-scrolled', window.scrollY > 48);
+  if (!header) return;
+  const heroBoundary = homeHero
+    ? homeHero.offsetTop + homeHero.offsetHeight - header.offsetHeight
+    : 48;
+  header.classList.toggle('is-scrolled', window.scrollY >= heroBoundary);
 }
 
 window.addEventListener('scroll', updateHeader, { passive: true });
-window.addEventListener('resize', () => positionNavLiquid(document.querySelector('.nav-links .is-active')));
+window.addEventListener('resize', () => {
+  positionNavLiquid(document.querySelector('.nav-links .is-active'));
+  updateHeader();
+});
 updateHeader();
 requestAnimationFrame(() => positionNavLiquid(document.querySelector('.nav-links .is-active')));
 

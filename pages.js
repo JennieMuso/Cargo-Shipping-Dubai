@@ -24,16 +24,32 @@ if (pageMenuButton && pageNav) {
   }));
 }
 
+const pageHero = document.querySelector('.page-hero, .service-detail-hero');
+
 function updatePageHeader() {
-  if (pageHeader) pageHeader.classList.toggle('is-scrolled', window.scrollY > 36);
+  if (!pageHeader) return;
+  const heroBoundary = pageHero
+    ? pageHero.offsetTop + pageHero.offsetHeight - pageHeader.offsetHeight
+    : 36;
+  pageHeader.classList.toggle('is-scrolled', window.scrollY >= heroBoundary);
 }
 
 window.addEventListener('scroll', updatePageHeader, { passive: true });
-window.addEventListener('resize', () => positionPageLiquid(document.querySelector('.nav-links .is-active')));
+window.addEventListener('resize', () => {
+  positionPageLiquid(document.querySelector('.nav-links .is-active'));
+  updatePageHeader();
+});
 updatePageHeader();
 requestAnimationFrame(() => positionPageLiquid(document.querySelector('.nav-links .is-active')));
 
 const detailMotionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const pageWordReveals = [...document.querySelectorAll('.display-statement')];
+
+pageWordReveals.forEach(text => {
+  const words = text.textContent.trim().split(/\s+/);
+  text.innerHTML = words.map(word => `<span class="page-copy-word">${word}</span>`).join(' ');
+});
+
 document.querySelectorAll('[data-smooth-details] details').forEach(detail => {
   const summary = detail.querySelector('summary');
   let transitionToken = 0;
@@ -102,7 +118,7 @@ if (window.gsap) {
       ease: 'power2.out'
     });
   });
-  document.querySelectorAll('[data-text-reveal]').forEach(text => {
+  document.querySelectorAll('[data-text-reveal]:not(.display-statement)').forEach(text => {
     gsap.from(text, {
       scrollTrigger: { trigger: text, start: 'top 88%' },
       y: detailMotionReduced ? 0 : 48,
@@ -110,5 +126,30 @@ if (window.gsap) {
       duration: detailMotionReduced ? .3 : .85,
       ease: 'power3.out'
     });
+  });
+
+  pageWordReveals.forEach(text => {
+    const finalColor = text.closest('.page-section--navy') ? '#ffffff' : '#102c34';
+    const words = text.querySelectorAll('.page-copy-word');
+    if (detailMotionReduced) {
+      gsap.set(words, { color: finalColor });
+      return;
+    }
+    gsap.to(words, {
+      color: finalColor,
+      stagger: .035,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: text,
+        start: 'top 78%',
+        end: 'bottom 46%',
+        scrub: true
+      }
+    });
+  });
+} else {
+  pageWordReveals.forEach(text => {
+    const finalColor = text.closest('.page-section--navy') ? '#ffffff' : '#102c34';
+    text.querySelectorAll('.page-copy-word').forEach(word => { word.style.color = finalColor; });
   });
 }
